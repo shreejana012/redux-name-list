@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-
+// import {bindActionCreators} from 'redux';
+import {store} from '../stores/store';
+import {updateName} from '../actions';
 
 class Form extends Component {
+    render(){
+        return(
+            <div>
+                <input type="text" onChange={this.handleChange} />
+                <button onClick= {() => this.handleSubmit()}>Submit</button>
+                <p>{ this.props.name }</p>
+            </div>
+        )
+    }
     handleChange = (event) => {
         this.setState({
             name: event.target.value
         })
     }
-    render(){
-        return(
-            <div>
-                <input type="text" value={this.state.name} onChange={this.handleChange} />
-                <button onclick= {this.props.handleSubmit}>Submit</button>
-                <p>{ this.props.name }</p>
-            </div>
-        )
+    handleSubmit = (event) => {
+        store.dispatch(updateName(this.state.name))
     }
 }
 function mapStateToProps(state) {
@@ -24,9 +28,9 @@ function mapStateToProps(state) {
         name: state.name,
     }
 }
-function matchDispatchToProps(dispatch){
-    return bindActionCreators({handleSubmit}, dispatch);
-}
+// function matchDispatchToProps(dispatch){
+//     return bindActionCreators({handleSubmit}, dispatch);
+// }
 
 
-export default connect(mapStateToProps, matchDispatchToProps)(Form);
+export default connect(mapStateToProps)(Form);
