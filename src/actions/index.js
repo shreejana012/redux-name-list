@@ -1,6 +1,6 @@
-export const handleSubmit = (addName) => {
+export const updateName = (name) => {
     return {
         type: 'ADDED_NAME',
-        payload: addName
+        payload: name
     }
 };
