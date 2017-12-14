@@ -4,3 +4,6 @@ export const updateName = (name) => {
         payload: name
     }
 };
+
+
+

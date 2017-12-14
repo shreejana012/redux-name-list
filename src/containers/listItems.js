@@ -2,24 +2,29 @@ import React from 'react';
 
 class ListItems extends React.Component {
 
-  // let items = this.props.list.map((item) =>
-  // <li>{item}</li>
-  // )
+  renderList() {
+    let text = this.props.name;
+    return text.map((list) => {
+    return (
+      <li key={list}>
+          {list}
+      </li>
+    );
+  });
+}
+  
   render() {
-    if(!this.props.list) {
+    if(!this.props.name) {
       return(
         <div>Listing...</div>
-    )}
-
-    let text = this.props.list;
-    let items = text.map((item) => {
-      <li>{item}</li>
-    })
+    );
+  }
     return(
       <ul>
-        {items}
+        {this.renderList()}
       </ul>
-    )
+    );
   }
 }
+
 export default ListItems;

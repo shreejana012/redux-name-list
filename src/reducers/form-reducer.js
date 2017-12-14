@@ -1,8 +1,14 @@
-export default function (state = null, action) {
+export default function (state = [], action = {}) {
     switch(action.type) {
         case 'ADDED_NAME':
-            return action.payload;
-            break;
+        // return action.payload;
+        // break;
+        return [
+            ...state,
+            action.payload
+            
+          ];      
+        default: 
+            return state;
     }
-      return state;
 }

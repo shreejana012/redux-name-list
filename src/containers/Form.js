@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+// import {bindActionCreators} from 'redux';
 import {updateName} from '../actions';
 import {store} from '../stores/store';
 import ListItems from './listItems';
 
 class Form extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            name: []
+        }
+      }
     handleChange = (event) => {
         this.setState({
             name: event.target.value
@@ -14,31 +20,27 @@ class Form extends Component {
 
     handleSubmit = (event) => {
       // event.preventDefault();
+    //   let a = this.props.name;
+    //   a.push(this.state.value);
+    //   this.setState({
+    //       name: a,
+    //   })
       store.dispatch(updateName(this.state.name))
     }
 
     render(){
       return(
           <div>
-              <input type="text" value={this.props.value} onChange={this.handleChange} />
+              <input type="text" value={this.state.value} onChange={this.handleChange} />
               <button onClick= {() => this.handleSubmit()}>Submit</button>
-              <ListItems list={this.props.name} />
+              <ListItems name={this.props.name}/>
           </div>
       );
-    }
-    handleChange = (event) => {
-        this.setState({
-            name: event.target.value
-        })
-    }
-    handleSubmit = (event) => {
-        store.dispatch(updateName(this.state.name))
     }
 }
 function mapStateToProps(state) {
     return{
-        name: state.name,
-        items: []
+        name: state.name
     }
 }
 // function matchDispatchToProps(dispatch){
@@ -46,8 +48,4 @@ function mapStateToProps(state) {
 // }
 
 
-<<<<<<< HEAD
 export default connect(mapStateToProps)(Form);
-=======
-export default connect(mapStateToProps)(Form);
->>>>>>> 6ee229d32ee68f3f404a7e131a4e54b7871c6000
